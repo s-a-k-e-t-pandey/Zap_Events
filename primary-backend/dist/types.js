@@ -10,7 +10,6 @@ exports.SignupSchema = zod_1.z.object({
 exports.SigninSchema = zod_1.z.object({
     username: zod_1.z.string(),
     password: zod_1.z.string(),
-    name: zod_1.z.string()
 });
 exports.ZapCreateSchema = zod_1.z.object({
     availableTriggerId: zod_1.z.string(),
