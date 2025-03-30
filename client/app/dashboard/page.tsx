@@ -1,7 +1,7 @@
 'use client'
 import { DarkButton } from "@/componets/buttons/DarkButton"
 import { useState, useEffect } from "react";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL, HOOK_URL } from "../config";
 import axios from "axios";
 import { IoReorderThreeSharp } from "react-icons/io5";
 import {Sidebar} from "../../componets/Sidebar"
@@ -21,7 +21,8 @@ interface Zap {
         "sortingOrder": number,
         "type": {
             "id": string,
-            "name": string
+            "name": string,
+            "image": string
         }
     }[],
     "trigger":{
@@ -30,7 +31,8 @@ interface Zap {
         "triggerId": string,
         "type": {
             "id": string,
-            "name": string
+            "name": string,
+            "image": string
         }
     }
 }
@@ -109,10 +111,13 @@ function ZapTable({zaps}: {zaps: Zap[]}){
                         Name
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Last edit
+                        Id
                     </th>
                     <th scope="col" className="px-6 py-3">
-                        Running
+                        Webhook Url
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                        Created At
                     </th>
                     <th scope="col" className="px-6 py-3">
                         Go
@@ -121,11 +126,16 @@ function ZapTable({zaps}: {zaps: Zap[]}){
             </thead>
             <tbody>
                 {zaps.map(z => <tr className="bg-white border-b border-t py-4 border-gray-200 border-w-4">
-                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {z.trigger.type.name} {z.actions.map(x => x.type.name)}
+                    <th scope="row" className="flex flex-row px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {/* {z.trigger.type.name} {z.actions.map(x => x.type.name + " ")} */}
+                        <img src={z.trigger.type.image} className="w-[30px] h-[30px]" />
+                        {z.actions.map(x => <img src={x.type.image} className="w-[30px] h-[30px]"/>)}
                     </th>
                     <td className="px-6 py-4">
-                        key={z.id}
+                        {z.id}
+                    </td>
+                    <td className="px-6 py-4">
+                        {`${HOOK_URL}/hooks/catch/1/z.id`}
                     </td>
                     <td className="px-6 py-4">
                         Nov 13, 2025

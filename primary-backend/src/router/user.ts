@@ -11,7 +11,6 @@ const router = Router();
 router.post("/signup", async (req: any, res: any)=>{
     const body = req.body;
     const parsedData = SignupSchema.safeParse(body);
-
     if(!parsedData.success){
         return res.status(411).json({
             msg: "Incorrect Credentials"
