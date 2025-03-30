@@ -41,7 +41,7 @@ export default function(){
                 }}></Input>
                 <div className="pt-4 flex justify-center">
                         <PrimaryButton onClick={async ()=>{   
-                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/login`,{
+                            const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`,{
                                 username: email,
                                 password,
                                 name
@@ -54,3 +54,5 @@ export default function(){
     </div>
 </div>
 }
+
+
