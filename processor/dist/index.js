@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -56,8 +56,8 @@ function main() {
                     _a.sent();
                     _a.label = 2;
                 case 2:
-                    if (!1) return [3 /*break*/, 5];
-                    return [4 /*yield*/, client.zapRunOutBox.findMany({
+                    if (!1) return [3 /*break*/, 6];
+                    return [4 /*yield*/, client.zapRunOutbox.findMany({
                             where: {},
                             take: 10
                         })];
@@ -67,11 +67,14 @@ function main() {
                         topic: TOPIC_NAME,
                         messages: pendingRows.map(function (r) {
                             return {
-                                value: r.zapRunId
+                                value: JSON.stringify({
+                                    zapRunId: r.zapRunId,
+                                    stage: 0
+                                })
                             };
                         })
                     });
-                    return [4 /*yield*/, client.zapRunOutBox.deleteMany({
+                    return [4 /*yield*/, client.zapRunOutbox.deleteMany({
                             where: {
                                 id: {
                                     in: pendingRows.map(function (r) { return r.id; })
@@ -80,8 +83,11 @@ function main() {
                         })];
                 case 4:
                     _a.sent();
+                    return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 3000); })];
+                case 5:
+                    _a.sent();
                     return [3 /*break*/, 2];
-                case 5: return [2 /*return*/];
+                case 6: return [2 /*return*/];
             }
         });
     });

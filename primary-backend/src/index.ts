@@ -17,4 +17,6 @@ app.use("/api/v1/trigger", triggerRouter);
 app.use("/api/v1/action", actionRouter);
 
 
-app.listen(3000);
+app.listen(3000, () => {
+    console.log("Primary backend server is running on port 3000");
+});

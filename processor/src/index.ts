@@ -15,7 +15,7 @@ async function main(){
     await producer.connect();
 
     while(1){
-        const pendingRows = await client.zapRunOutBox.findMany({
+        const pendingRows = await client.zapRunOutbox.findMany({
             where : {},
             take : 10
         })
@@ -24,18 +24,22 @@ async function main(){
             topic : TOPIC_NAME,
             messages : pendingRows.map(r => {
                 return {
-                    value: r.zapRunId
+                    value: JSON.stringify({
+                        zapRunId: r.zapRunId,
+                        stage: 0
+                    })
                 }
             })
         })
 
-        await client.zapRunOutBox.deleteMany({
+        await client.zapRunOutbox.deleteMany({
             where: {
                 id: {
                     in: pendingRows.map(r => r.id)
                 }
             }
         })
+        await new Promise(r => setTimeout(r, 3000));
     }
 }
 

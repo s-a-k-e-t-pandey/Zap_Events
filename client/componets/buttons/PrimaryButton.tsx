@@ -13,7 +13,7 @@ export const PrimaryButton = ({
   return (
     <div
       className={`
-        ${size === "small" ? "px-8 py-2 text-sm" : "px-12 py-4 text-lg"} 
+        ${size === "small" ? "px-8 py-2 my-2 text-sm" : "px-12 py-4 text-lg"} 
         bg-amber-700 text-white inline-flex items-center justify-center cursor-pointer 
         transition-colors hover:shadow-lg rounded-full leading-none
       `}

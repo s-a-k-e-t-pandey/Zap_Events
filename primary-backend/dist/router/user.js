@@ -24,13 +24,11 @@ const router = (0, express_1.Router)();
 router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const parsedData = types_1.SignupSchema.safeParse(body);
-    console.log("signup");
     if (!parsedData.success) {
         return res.status(411).json({
             msg: "Incorrect Credentials"
         });
     }
-    console.log("parsedsignup");
     const existingUser = yield db_1.prismaClient.user.findFirst({
         where: {
             email: parsedData.data.username,
@@ -41,7 +39,6 @@ router.post("/signup", (req, res) => __awaiter(void 0, void 0, void 0, function*
             msg: "User already exist"
         });
     }
-    console.log("passed signup");
     const hashedPassword = bcryptjs_1.default.hash(parsedData.data.password, 10);
     yield db_1.prismaClient.user.create({
         data: {

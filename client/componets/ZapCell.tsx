@@ -14,6 +14,7 @@ interface ZapCellProps {
     index: number;
     availableActionId: string;
     availableActionName: string;
+    metadata?: any;
   }>>>;
 }
 
@@ -47,6 +48,7 @@ export const ZapCell: React.FC<ZapCellProps> = ({ name, index, onClick, selected
                         index: index+1,
                         availableActionId: "",
                         availableActionName: "",
+                        metadata: {},
                       },
                     ]);
                   }}

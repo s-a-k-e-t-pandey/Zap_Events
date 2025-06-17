@@ -128,21 +128,21 @@ function ZapTable({zaps}: {zaps: Zap[]}){
                 {zaps.map(z => <tr className="bg-white border-b border-t py-4 border-gray-200 border-w-4">
                     <th scope="row" className="flex flex-row px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {/* {z.trigger.type.name} {z.actions.map(x => x.type.name + " ")} */}
-                        <img src={z.trigger.type.image} className="w-[30px] h-[30px]" />
+                        <img src={z.trigger?.type.image} className="w-[30px] h-[30px]" />
                         {z.actions.map(x => <img src={x.type.image} className="w-[30px] h-[30px]"/>)}
                     </th>
                     <td className="px-6 py-4">
                         {z.id}
                     </td>
                     <td className="px-6 py-4">
-                        {`${HOOK_URL}/hooks/catch/1/z.id`}
+                        {`${HOOK_URL}/hooks/catch/${z.userId}/${z.id}`}
                     </td>
                     <td className="px-6 py-4">
                         Nov 13, 2025
                     </td>
                     <td className="px-6 py-4">
                         <LinkButton onClick={()=>{
-                            router.push("/zap"+z.id)
+                            router.push("/zap/"+z.id)
                             }}><IoIosArrowForward />
                         </LinkButton>
                     </td>
